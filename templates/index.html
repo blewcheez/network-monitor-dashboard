@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+
+
+<html>
+  <head>
+    <title>Network Monitoring Dashboard</title> 
+  </head> 
+  <body> 
+    <h1>Network Monitoring Dashboard</h1> 
+      <table border ="1"> 
+        <tr>
+          <th>Time</th> 
+          <th>Ping (ms)</th>
+          <th>Download (Mbps)</th>
+          <th>Upload (Mbps)</th>
+          <th>(CPU) (%)</th>
+          <th>Memory (%)</th>
+          <th>Disk (%)</th>         
+        </tr> 
+        {% for entry in data %}
+        <tr> 
+          <th>{{ entry.time }}</th> 
+          <th>{{ entry.ping_ms }}</th>
+          <th>{{ entry.download_mbps }}</th>
+          <th>{{ entry.upload_mbps }}</th>
+          <th>{{ entry.cpu_percent }}</th>
+          <th>{{ entry.memory_percent }}</th>
+          <th>{{ entry.disk_percent }}</th>         
+        </tr> 
+        {% endfor %}
+        </table> 
+  </body> 
+</html> 

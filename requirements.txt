@@ -1,0 +1,8 @@
+flask
+psutil
+speedtest-cli
+ping3
+
+
+
+#information available on http://127.0.0.1:5000/ 
