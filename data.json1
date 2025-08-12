@@ -1,5 +1,0 @@
-[
-  {"time": "2025-08-09 14:00:00", "ping_ms": 15, "download_mbps": 120, "upload_mbps": 45, "cpu_percent": 30, "memory_percent": 50, "disk_percent": 60},
-  {"time": "2025-08-09 14:05:00", "ping_ms": 20, "download_mbps": 110, "upload_mbps": 40, "cpu_percent": 35, "memory_percent": 52, "disk_percent": 62},
-  {"time": "2025-08-09 14:10:00", "ping_ms": 18, "download_mbps": 115, "upload_mbps": 43, "cpu_percent": 32, "memory_percent": 49, "disk_percent": 61}
-]

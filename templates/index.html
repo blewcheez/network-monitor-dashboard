@@ -1,33 +1,77 @@
-<!DOCTYPE html> 
-
-
+<!DOCTYPE html>
 <html>
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Network Monitoring Dashboard</title> 
   </head> 
   <body> 
     <h1>Network Monitoring Dashboard</h1> 
-      <table border ="1"> 
-        <tr>
-          <th>Time</th> 
-          <th>Ping (ms)</th>
-          <th>Download (Mbps)</th>
-          <th>Upload (Mbps)</th>
-          <th>(CPU) (%)</th>
-          <th>Memory (%)</th>
-          <th>Disk (%)</th>         
-        </tr> 
-        {% for entry in data %}
-        <tr> 
-          <th>{{ entry.time }}</th> 
-          <th>{{ entry.ping_ms }}</th>
-          <th>{{ entry.download_mbps }}</th>
-          <th>{{ entry.upload_mbps }}</th>
-          <th>{{ entry.cpu_percent }}</th>
-          <th>{{ entry.memory_percent }}</th>
-          <th>{{ entry.disk_percent }}</th>         
-        </tr> 
-        {% endfor %}
-        </table> 
+
+    <canvas id="pingChart" width="600" height="300"></canvas> 
+    <canvas id="speedChart" width="600" height="300"></canvas> 
+
+    <script> 
+      // Get data passed from Flask
+      const timestamps = {{ timestamps | tojson }};
+      const pingData = {{ ping | tojson }};
+      const downloadData = {{ download | tojson }};
+      const uploadData = {{ upload | tojson }}; 
+
+      // Ping Chart 
+      const ctxPing = document.getElementById('pingChart').getContext('2d');
+      const pingChart = new Chart(ctxPing, {
+        type: 'line',
+        data: {
+          labels: timestamps, 
+          datasets: [{
+            label: 'Ping (ms)',
+            data: pingData, 
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)', 
+            fill: true, 
+            tension: 0.1
+          }]
+        },
+        options: {
+          scales: {
+            x: { display: true, title: { display: true, text: 'Time' }}, 
+            y: { display: true, title: { display: true, text: 'Milliseconds' }, beginAtZero: true }
+          }
+        }
+      }); 
+
+      // Speed Chart 
+      const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+      const speedChart = new Chart(ctxSpeed, {
+        type: 'line',
+        data: {
+          labels: timestamps,
+          datasets: [
+            {
+              label: 'Download (Mbps)', 
+              data: downloadData, 
+              borderColor: 'rgba(54, 162, 235, 1)', 
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              fill: true, 
+              tension: 0.1
+            },
+            {
+              label: 'Upload (Mbps)',
+              data: uploadData, 
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              fill: true, 
+              tension: 0.1 
+            }
+          ]
+        },
+        options: {
+          scales: {
+            x: { display: true, title: { display: true, text: 'Time'}}, 
+            y: { display: true, title: { display: true, text: 'Mbps'}, beginAtZero: true } 
+          }
+        }
+      });
+    </script> 
   </body> 
-</html> 
+</html>
