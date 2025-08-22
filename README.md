@@ -9,7 +9,6 @@
 
 <br> </br> 
 
-
 <h2 align="center"> 📦 Technologies & Libraries used and why </h2>
 
 - Visual Studio Code (VSCode) - The editor where all the code was written, tested, and managed.
